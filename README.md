@@ -24,27 +24,27 @@
       <li><strong>Clone the repository:</strong></li>
       <pre><code>git clone https://github.com/R0n1ns/wireguard-micro-vpn</code></pre>
 
-      <li><strong>Install dependencies:</strong> Make sure you have Go installed on your system.</li>
-      <pre><code>go get github.com/R0n1ns/wireguard_go_ubuntu</code></pre>
+  <li><strong>Install dependencies:</strong> Make sure you have Go installed on your system.</li>
+  <pre><code>go get github.com/R0n1ns/wireguard_go_ubuntu</code></pre>
 
-      <li><strong>Build the program:</strong></li>
-      <pre><code>go build -o wireguard-micro-vpn main.go</code></pre>
+  <li><strong>Build the program:</strong></li>
+  <pre><code>go build -o wireguard-micro-vpn main.go</code></pre>
 
-      <li><strong>Run the compiled program:</strong></li>
-      <pre><code>./wireguard-micro-vpn</code></pre>
+  <li><strong>Run the compiled program:</strong></li>
+  <pre><code>./wireguard-micro-vpn</code></pre>
 
-      <li><strong>Program Usage:</strong> After starting the program, follow the prompts to interact with the WireGuard VPN setup. The available commands include:</li>
-      <ul>
-          <li>1: Start WireGuard server (manual or automatic configuration)</li>
-          <li>2: Add a new client</li>
-          <li>3: Stop a client connection</li>
-          <li>4: Activate a client connection</li>
-          <li>5: Delete a client connection</li>
-          <li>6: List all clients</li>
-          <li>7: Send client configuration to Telegram</li>
-          <li>-2: Remove WireGuard configuration and stop the server</li>
-          <li>-1: Exit the program</li>
-      </ul>
+  <li><strong>Program Usage:</strong> After starting the program, follow the prompts to interact with the WireGuard VPN setup. The available commands include:</li>
+  <ul>
+      <li>1: Start WireGuard server (manual or automatic configuration)</li>
+      <li>2: Add a new client</li>
+      <li>3: Stop a client connection</li>
+      <li>4: Activate a client connection</li>
+      <li>5: Delete a client connection</li>
+      <li>6: List all clients</li>
+      <li>7: Send client configuration to Telegram</li>
+      <li>-2: Remove WireGuard configuration and stop the server</li>
+      <li>-1: Exit the program</li>
+  </ul>
   </ol>
 
   <h3>Automatic Configuration Mode:</h3>
