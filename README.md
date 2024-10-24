@@ -24,14 +24,14 @@
       <li><strong>Clone the repository:</strong></li>
       <pre><code>git clone https://github.com/R0n1ns/wireguard-micro-vpn</code></pre>
 
-  <li><strong>Install dependencies:</strong> Make sure you have Go installed on your system.</li>
+  <li><strong>Install dependencies:</strong> sudo apt install wireguard</li>
   <pre><code>go get github.com/R0n1ns/wireguard_go_ubuntu</code></pre>
 
-  <li><strong>Build the program:</strong></li>
-  <pre><code>go build -o wireguard-micro-vpn main.go</code></pre>
+  <li><strong>Change mod for run:</strong></li>
+  <pre><code>chmode +h micro</code></pre>
 
   <li><strong>Run the compiled program:</strong></li>
-  <pre><code>./wireguard-micro-vpn</code></pre>
+  <pre><code>sudo ./micro</code></pre>
 
   <li><strong>Program Usage:</strong> After starting the program, follow the prompts to interact with the WireGuard VPN setup. The available commands include:</li>
   <ul>
