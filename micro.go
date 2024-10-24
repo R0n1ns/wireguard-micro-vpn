@@ -1,17 +1,16 @@
 package main
 
 import (
+	"Project/wireguard_go_ubuntu"
 	"fmt"
-	"github.com/R0n1ns/wireguard_go_ubuntu"
 	"log"
-	"os"
 )
 
 var filename = "data.json"
-var wg_client = wireguard_go_ubuntu.WireGuardConfig{}
+var Wg_client = wireguard_go_ubuntu.WireGuardConfig{}
 
 func init() {
-	wg_client.LoadFromFile(filename)
+	Wg_client.LoadFromFile(filename)
 }
 
 // Функция для запроса целого числа от пользователя
@@ -30,70 +29,70 @@ func inputString(prompt string) string {
 	return value
 }
 
-func handleStartWireguard(wg_client *wireguard_go_ubuntu.WireGuardConfig) {
+func handleStartWireguard(Wg_client *wireguard_go_ubuntu.WireGuardConfig) {
 	tp := inputInt("если хотите автоматическую настройку введите 0, ручной режим 1: ")
 	if tp != 0 {
-		wg_client.ListenPort = inputString("Введите порт, или 0 для порта 51820: ")
-		if wg_client.ListenPort == "0" {
-			wg_client.ListenPort = "51820"
+		Wg_client.ListenPort = inputString("Введите порт, или 0 для порта 51820: ")
+		if Wg_client.ListenPort == "0" {
+			Wg_client.ListenPort = "51820"
 		}
-		wg_client.Endpoint = inputString("Введите ip сервера: ") + ":" + wg_client.ListenPort
-		wg_client.InterName = inputString("Введите имя интерфейса, или 0 для eth0: ")
-		if wg_client.InterName == "0" {
-			wg_client.InterName = "eth0"
+		Wg_client.Endpoint = inputString("Введите ip сервера: ") + ":" + Wg_client.ListenPort
+		Wg_client.InterName = inputString("Введите имя интерфейса, или 0 для eth0: ")
+		if Wg_client.InterName == "0" {
+			Wg_client.InterName = "eth0"
 		}
-		wg_client.BotToken = inputString("Введите токен бота: ")
+		Wg_client.BotToken = inputString("Введите токен бота: ")
 
 		fmt.Println("Параметры успешно заданы")
-		wg_client.CollectTraffic()
-		wg_client.GenServerKeys()
-		fmt.Printf("Созданный приватный ключ: %s\nСозданный публичный ключ: %s\n", wg_client.PrivateKey, wg_client.PublicKey)
+		Wg_client.CollectTraffic()
+		Wg_client.GenServerKeys()
+		fmt.Printf("Созданный приватный ключ: %s\nСозданный публичный ключ: %s\n", Wg_client.PrivateKey, Wg_client.PublicKey)
 
-		wg_client.GenerateWireGuardConfig()
-		wg_client.WireguardStart()
+		Wg_client.GenerateWireGuardConfig()
+		Wg_client.WireguardStart()
 		log.Printf("Соединение wireguard запущено")
 	} else {
-		wg_client.Autostart()
-		wg_client.BotToken = inputString("Введите токен бота: ")
-		fmt.Printf("Созданный приватный ключ: %s\nСозданный публичный ключ: %s\n", wg_client.PrivateKey, wg_client.PublicKey)
+		Wg_client.Autostart()
+		Wg_client.BotToken = inputString("Введите токен бота: ")
+		fmt.Printf("Созданный приватный ключ: %s\nСозданный публичный ключ: %s\n", Wg_client.PrivateKey, Wg_client.PublicKey)
 	}
 }
 
-func handleAddClient(wg_client *wireguard_go_ubuntu.WireGuardConfig, id *int) {
-	client, _ := wg_client.AddWireguardClient(*id)
+func handleAddClient(Wg_client *wireguard_go_ubuntu.WireGuardConfig, id *int) {
+	client, _ := Wg_client.AddWireguardClient(*id)
 	fmt.Printf("Данные клиента:\nАдрес: %s\nПубличный ключ: %s\nПриватный ключ: %s\n",
 		client.AddressClient, client.PublicClientKey, client.PrivateClientKey)
 
 	tgID := inputInt("Введите тг id клиента или -1, если отправлять конфиг не нужно: ")
 	if tgID != -1 {
 		client.TgId = tgID
-		wg_client.Clients[*id] = client
-		wg_client.SendConfigToUserTg(*id)
+		Wg_client.Clients[*id] = client
+		Wg_client.SendConfigToUserTg(*id)
 		fmt.Println("Данные отправлены")
 	}
 	(*id)++
 }
 
-func handleClientAction(wg_client *wireguard_go_ubuntu.WireGuardConfig, action func(int), prompt string) {
+func handleClientAction(Wg_client *wireguard_go_ubuntu.WireGuardConfig, action func(int), prompt string) {
 	usID := inputInt(prompt)
 	action(usID)
 }
 
-func printAllClients(wg_client *wireguard_go_ubuntu.WireGuardConfig) {
-	clients := wg_client.AllClients()
+func printAllClients(Wg_client *wireguard_go_ubuntu.WireGuardConfig) {
+	clients := Wg_client.AllClients()
 	fmt.Println(clients)
 }
 
-func handleSendClientData(wg_client *wireguard_go_ubuntu.WireGuardConfig) {
+func handleSendClientData(Wg_client *wireguard_go_ubuntu.WireGuardConfig) {
 	usID := inputInt("Введите id клиента или -1, если отправлять конфиг не нужно: ")
 	if usID != -1 {
-		wg_client.SendConfigToUserTg(usID)
+		Wg_client.SendConfigToUserTg(usID)
 		fmt.Println("Данные отправлены")
 	}
 }
 
-func handleDropWireguard(wg_client *wireguard_go_ubuntu.WireGuardConfig) {
-	wg_client.DropWireguard()
+func handleDropWireguard(Wg_client *wireguard_go_ubuntu.WireGuardConfig) {
+	Wg_client.DropWireguard()
 	fmt.Println("Конфигурации и скрипт удален")
 }
 
@@ -103,10 +102,20 @@ func main() {
 			// Вывод ошибки
 			fmt.Println("Произошла ошибка:", r)
 			// Вызов функции снова
-			wg_client.SaveToFile(filename)
 			main()
 		}
 	}()
+
+	// Отложенное сохранение данных перед выходом
+	defer func() {
+		err := Wg_client.SaveToFile(filename)
+		if err != nil {
+			log.Printf("Ошибка при сохранении файла: %v", err)
+		} else {
+			fmt.Println("Конфигурация успешно сохранена.")
+		}
+	}()
+
 	id := 2
 	firstMess := `Доступные команды:
 1. Запуск wireguard
@@ -123,26 +132,31 @@ func main() {
 	fmt.Println(firstMess)
 
 	commands := map[int]func(){
-		1: func() { handleStartWireguard(&wg_client) },
-		2: func() { handleAddClient(&wg_client, &id) },
+		1: func() { handleStartWireguard(&Wg_client) },
+		2: func() { handleAddClient(&Wg_client, &id) },
 		3: func() {
-			handleClientAction(&wg_client, wg_client.StopClient, "Введите id клиента для остановки: ")
+			handleClientAction(&Wg_client, Wg_client.StopClient, "Введите id клиента для остановки: ")
 		},
 		4: func() {
-			handleClientAction(&wg_client, wg_client.ActClient, "Введите id клиента для активации: ")
+			handleClientAction(&Wg_client, Wg_client.ActClient, "Введите id клиента для активации: ")
 		},
 		5: func() {
-			handleClientAction(&wg_client, wg_client.DeleteClient, "Введите id клиента для удаления: ")
+			handleClientAction(&Wg_client, Wg_client.DeleteClient, "Введите id клиента для удаления: ")
 		},
-		6:  func() { printAllClients(&wg_client) },
-		7:  func() { handleSendClientData(&wg_client) },
-		-2: func() { handleDropWireguard(&wg_client) },
+		6:  func() { printAllClients(&Wg_client) },
+		7:  func() { handleSendClientData(&Wg_client) },
+		-2: func() { handleDropWireguard(&Wg_client) },
 		0:  func() { fmt.Println(firstMess) },
-		-1: func() { fmt.Println("Скрипт остановлен"); os.Exit(0) },
 	}
 
 	for {
 		comand := inputInt("Введите команду: ")
+		if comand == -1 {
+			fmt.Println("Скрипт остановлен")
+			// Прерываем цикл, вместо вызова os.Exit
+			break
+		}
+
 		if action, exists := commands[comand]; exists {
 			action()
 		} else {
