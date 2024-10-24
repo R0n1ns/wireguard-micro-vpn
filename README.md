@@ -29,7 +29,7 @@
   <pre><code> sudo apt install wireguard</code></pre>
 
   <li><strong>Change mod for run:</strong></li>
-  <pre><code>chmode +h micro</code></pre>
+  <pre><code>chmode +x micro</code></pre>
 
   <li><strong>Run the compiled program:</strong></li>
   <pre><code>sudo ./micro</code></pre>
