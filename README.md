@@ -1,5 +1,6 @@
 <h1>WireGuard Micro VPN</h1>
-  <p><a href="https://github.com/R0n1ns/wireguard-micro-vpn">GitHub Repository</a></p>
+  <p><a href="https://github.com/R0n1ns/wireguard-micro-vpn">Project GitHub Repository</a></p>
+  <p><a href="https://github.com/R0n1ns/wireguard_go_ubuntu">Wireguard library </a></p>
 
   <h2>Compiled Program Description</h2>
   <p>
