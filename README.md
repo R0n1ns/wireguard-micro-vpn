@@ -25,8 +25,8 @@
       <li><strong>Clone the repository:</strong></li>
       <pre><code>git clone https://github.com/R0n1ns/wireguard-micro-vpn</code></pre>
 
-  <li><strong>Install dependencies:</strong> sudo apt install wireguard</li>
-  <pre><code>go get github.com/R0n1ns/wireguard_go_ubuntu</code></pre>
+  <li><strong>Install dependencies:</strong></li>
+  <pre><code> sudo apt install wireguard</code></pre>
 
   <li><strong>Change mod for run:</strong></li>
   <pre><code>chmode +h micro</code></pre>
