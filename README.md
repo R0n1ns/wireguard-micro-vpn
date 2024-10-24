@@ -27,6 +27,8 @@
 
   <li><strong>Install dependencies:</strong></li>
   <pre><code> sudo apt install wireguard</code></pre>
+  <li><strong>Move to folder:</strong></li>
+  <pre><code> cd wireguard-micro-vpn</code></pre>
 
   <li><strong>Change mod for run:</strong></li>
   <pre><code>chmod +x micro</code></pre>
